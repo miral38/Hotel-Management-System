@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE REGENCY | Elite Hotel & Resorts</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #AD9671;
+            --dark-bg: #1A1A1A;
+            --soft-white: #F4F4F4;
+            --text-gray: #888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background-color: var(--soft-white); color: var(--dark-bg); overflow-x: hidden; }
+
+        header { 
+            background: rgba(26, 26, 26, 0.98); padding: 20px 8%; 
+            position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid rgba(173, 150, 113, 0.3);
+        }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Cormorant Garamond', serif; color: var(--gold); font-size: 30px; letter-spacing: 3px; cursor: pointer; text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { color: white; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; text-decoration: none; }
+        .nav-links a:hover { color: var(--gold); }
+
+        .page { display: none; padding-top: 100px; animation: fadeIn 0.6s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .hero {
+            height: 90vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; color: white; margin-top: -100px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+            url('https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover;
+        }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 8vw, 85px); margin-bottom: 20px; font-weight: 700; }
+        .btn-gold { 
+            background: var(--gold); color: white; padding: 18px 40px; border: none; 
+            text-transform: uppercase; letter-spacing: 2px; cursor: pointer; font-weight: 600; transition: 0.3s;
+        }
+        .btn-gold:hover { background: #8e7a5c; }
+
+        .container { padding: 80px 8%; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 48px; text-align: center; margin-bottom: 50px; }
+        
+        .room-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .room-card { background: white; overflow: hidden; position: relative; transition: 0.4s; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .room-card:hover { transform: translateY(-10px); }
+        .room-card img { width: 100%; height: 320px; object-fit: cover; }
+        .room-info { padding: 35px; }
+        .room-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; margin-bottom: 12px; }
+        .room-price { color: var(--gold); font-size: 20px; font-weight: 600; margin-bottom: 25px; display: block; }
+
+        .booking-ui { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
+        .booking-form { background: white; padding: 45px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 11px; text-transform: uppercase; color: var(--text-gray); font-weight: 600; }
+        .input-group input, .input-group select { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; outline: none; }
+        
+        .summary-card { background: var(--dark-bg); color: white; padding: 45px; border-radius: 8px; height: fit-content; position: sticky; top: 120px; }
+        .summary-line { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 12px; }
+
+        .amenity-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .amenity-item { padding: 50px 30px; background: white; text-align: center; border: 1px solid #eee; transition: 0.3s; }
+        .amenity-item:hover { border-color: var(--gold); }
+        .amenity-item i { font-size: 45px; color: var(--gold); margin-bottom: 25px; }
+
+        footer { background: var(--dark-bg); color: white; padding: 80px 8% 40px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a class="logo" onclick="showPage('home')">THE REGENCY</a>
+            <ul class="nav-links">
+                <li><a onclick="showPage('home')">Home</a></li>
+                <li><a onclick="showPage('rooms')">Suites</a></li>
+                <li><a onclick="showPage('amenities')">Experience</a></li>
+                <li><a onclick="showPage('booking')">Reservations</a></li>
+            </ul>
+            <button class="btn-gold" style="padding: 12px 25px; font-size: 11px;" onclick="showPage('booking')">Book Now</button>
+        </nav>
+    </header>
+
+    <main id="home" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <p style="letter-spacing: 6px; text-transform: uppercase; margin-bottom: 25px; font-size: 14px;">The Epitome of Hospitality</p>
+                <h1>Elite Comfort & Style</h1>
+                <button class="btn-gold" onclick="showPage('rooms')">View Collection</button>
+            </div>
+        </section>
+        
+        <div class="container">
+            <h2 class="section-title">A New Standard of Luxury</h2>
+            <p style="text-align: center; max-width: 850px; margin: 0 auto 50px; color: var(--text-gray); line-height: 2; font-size: 17px;">
+                Welcome to Pakistan's premier luxury destination. From the moment you arrive, 
+                our dedicated staff ensures every detail of your stay is curated to perfection. 
+                Experience grand architecture, world-class dining, and tranquility.
+            </p>
+        </div>
+    </main>
+
+    <main id="rooms" class="page">
+        <div class="container">
+            <h2 class="section-title">Signature Suites</h2>
+            <div class="room-grid" id="room-container"></div>
+        </div>
+    </main>
+
+    <main id="amenities" class="page">
+        <div class="container">
+            <h2 class="section-title">Exquisite Services</h2>
+            <div class="amenity-grid">
+                <div class="amenity-item"><i class="fa fa-spa"></i><h3>Wellness Spa</h3><p>Traditional and modern healing therapies.</p></div>
+                <div class="amenity-item"><i class="fa fa-swimming-pool"></i><h3>Infinity Pool</h3><p>Temperature-controlled year-round swimming.</p></div>
+                <div class="amenity-item"><i class="fa fa-utensils"></i><h3>Fine Dining</h3><p>Award-winning chefs and global flavors.</p></div>
+                <div class="amenity-item"><i class="fa fa-concierge-bell"></i><h3>24/7 Butler</h3><p>Personalized service at your fingertips.</p></div>
+            </div>
+        </div>
+    </main>
+
+    <main id="booking" class="page">
+        <div class="container">
+            <h2 class="section-title">Reservation Desk</h2>
+            <div class="booking-ui">
+                <div class="booking-form">
+                    <form id="resForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="input-group"><label>Check In</label><input type="date" id="checkin" required onchange="calculateTotal()"></div>
+                            <div class="input-group"><label>Check Out</label><input type="date" id="checkout" required onchange="calculateTotal()"></div>
+                        </div>
+                        <div class="input-group">
+                            <label>Suite Type</label>
+                            <select id="roomSelect" onchange="calculateTotal()">
+                                <option value="45000" data-name="Deluxe Executive">Deluxe Executive — Rs. 45,000/night</option>
+                                <option value="85000" data-name="Presidential Suite">Presidential Suite — Rs. 85,000/night</option>
+                                <option value="150000" data-name="Royal Penthouse">Royal Penthouse — Rs. 150,000/night</option>
+                            </select>
+                        </div>
+                        <div class="input-group"><label>Full Name</label><input type="text" placeholder="Enter Name" required></div>
+                        <div class="input-group"><label>Contact Email</label><input type="email" placeholder="Enter Email" required></div>
+                        <button type="submit" class="btn-gold" style="width: 100%; margin-top: 10px;">Secure Reservation</button>
+                    </form>
+                </div>
+
+                <div class="summary-card">
+                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 26px; margin-bottom: 25px; border-bottom: 1px solid #444; padding-bottom: 15px;">Stay Summary</h3>
+                    <div class="summary-line"><span>Selected Suite</span> <span id="summary-room">Deluxe Executive</span></div>
+                    <div class="summary-line"><span>Duration</span> <span id="summary-nights">0</span> Nights</div>
+                    <div class="summary-line" style="border:none; margin-top: 35px;">
+                        <span style="font-size: 22px; color: var(--gold); font-weight: 600;">Total Estimate</span>
+                        <span style="font-size: 22px; color: var(--gold); font-weight: 600;">Rs. <span id="summary-total">0</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <h2 class="logo" style="margin-bottom: 25px;">THE REGENCY</h2>
+        <p style="opacity: 0.6; font-size: 14px; letter-spacing: 1px;">The Mall, westridge 3, rawalpindi, Pakistan</p>
+        <div style="margin: 30px 0;">
+            <i class="fab fa-facebook-f" style="margin: 0 15px; cursor: pointer;"></i>
+            <i class="fab fa-instagram" style="margin: 0 15px; cursor: pointer;"></i>
+            <i class="fab fa-twitter" style="margin: 0 15px; cursor: pointer;"></i>
+        </div>
+        <p style="margin-top: 40px; font-size: 11px; opacity: 0.4; text-transform: uppercase; letter-spacing: 2px;">&copy; 2026 The Regency Hotels Group. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const rooms = [
+            { name: "Deluxe Executive", price: "45,000", rawPrice: 45000, img: "https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=600" },
+            { name: "Presidential Suite", price: "85,000", rawPrice: 85000, img: "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=600" },
+            { name: "Royal Penthouse", price: "150,000", rawPrice: 150000, img: "https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg?auto=compress&cs=tinysrgb&w=600" }
+        ];
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function loadRooms() {
+            const container = document.getElementById('room-container');
+            rooms.forEach(room => {
+                container.innerHTML += `
+                    <div class="room-card">
+                        <img src="${room.img}" alt="${room.name}">
+                        <div class="room-info">
+                            <h3>${room.name}</h3>
+                            <span class="room-price">Rs. ${room.price} / per night</span>
+                            <button class="btn-gold" style="width:100%; padding: 14px;" onclick="showPage('booking')">Book Now</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function calculateTotal() {
+            const checkinVal = document.getElementById('checkin').value;
+            const checkoutVal = document.getElementById('checkout').value;
+            const roomPrice = parseInt(document.getElementById('roomSelect').value);
+            const roomName = document.getElementById('roomSelect').options[document.getElementById('roomSelect').selectedIndex].getAttribute('data-name');
+            
+            if (checkinVal && checkoutVal) {
+                const checkin = new Date(checkinVal);
+                const checkout = new Date(checkoutVal);
+                
+                if (checkout > checkin) {
+                    const diffTime = Math.abs(checkout - checkin);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    
+                    document.getElementById('summary-nights').innerText = diffDays;
+                    document.getElementById('summary-room').innerText = roomName;
+                    document.getElementById('summary-total').innerText = (diffDays * roomPrice).toLocaleString();
+                } else {
+                    document.getElementById('summary-nights').innerText = "0";
+                    document.getElementById('summary-total').innerText = "0";
+                }
+            }
+        }
+
+        document.getElementById('resForm').onsubmit = function(e) {
+            e.preventDefault();
+            alert("Reservation Successful! We have locked in your suite at The Regency. Our concierge will contact you shortly.");
+            showPage('home');
+            this.reset();
+            document.getElementById('summary-total').innerText = "0";
+            document.getElementById('summary-nights').innerText = "0";
+        }
+
+        loadRooms();
+    </script>
+</body>
+</html>
